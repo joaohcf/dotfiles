@@ -8,5 +8,3 @@ for item in *; do
         cp -r "$item" "$DEST/"
     fi
 done
-
-reboot
