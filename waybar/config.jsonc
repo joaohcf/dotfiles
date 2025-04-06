@@ -9,59 +9,18 @@
         "hyprland/window"
     ],
     "modules-right": [
-        "idle_inhibitor",
+        "tray",
         "backlight",
-        "temperature#cpu",
-        "temperature#gpu",
-        "pulseaudio",
-        //"network",
-        "cpu",
-        "custom/gpu-usage",
+        "custom/cpu",
+        "custom/gpu",
         "memory",
+        "network",
         "battery",
         "battery#bat2",
+        "pulseaudio",
         "clock",
-        "tray",
-	"custom/wlogout"
+	    "custom/wlogout"
     ],
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-        "spacing": 5
-    },
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}%",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}%"
-    },
-    "temperature#cpu": {
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        "format": "CPU {temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
-    "temperature#gpu": {
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
-        "critical-threshold": 80,
-        "format": "GPU {temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
-    "backlight": {
-        "device": "acpi_video1",
-        "format": "{percent}% ",
-        "format-icons": ["", ""]
-    },
     "battery": {
         "states": {
             "good": 95,
@@ -79,33 +38,52 @@
     "battery#bat2": {
         "bat": "BAT2"
     },
+    "custom/cpu": {
+        "exec": "~/.config/waybar/cpu.py",
+        "format": "{}",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 5
+    },
+    "custom/gpu": {
+        "exec": "~/.config/waybar/gpu.py",
+        "format": "{}",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 5
+    },
+    "memory": {
+        "format": " {used:0.1f}/{total:0.1f} GB"
+    },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format": "{ifname}",
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-ethernet": "{ifname} ", //mexer aqui
+        "format-disconnected": "",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disconnected": "Disconnected"
+    },
+    "tray": {
+        "spacing": 5,
+        "show-passive-items": true
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}%  {format_source}",
-        "format-bluetooth": "{volume}%  {format_source}",
+        "format": "{volume}%   {format_source}",
+        "format-bluetooth": "{volume}%   {format_source}",
         "format-bluetooth-muted": " {format_source}",
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "on-click": "pavucontrol"
+        "format-source-muted": ""
     },
-    "custom/gpu-usage": {
-        "exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
-        "format": "{}%",
-        "return-type": "",
-        "interval": 1
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
     },
     "custom/wlogout": {
-	"on-click": "wlogout",
-	"format": "X",
-	"return-type": "",
-    },
+        "on-click": "wlogout",
+        "format": "",
+        "return-type": ""
+    }
 }

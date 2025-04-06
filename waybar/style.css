@@ -1,14 +1,21 @@
+@define-color black #000000;
+@define-color white #ffffff;
+@define-color dark-grey #101010;
+@define-color warning #eb4d4b;
+@define-color blue #eb4d4b;
+
 * {
     border: none;
     border-radius: 4px;
 
-    font-family: "Roboto Mono Medium", Helvetica, Arial, sans-serif;
+    font-family: "Font Awesome 5 Free", "JetBrainsMono Nerd Font", "Roboto", sans-serif;
     font-size: 12px;
+    font-weight: 600;
 }
 
 window#waybar {
-    background-color: #000;
-    color: #fff;
+    background-color: @black;
+    color: @white;
 }
 
 #workspaces button{
@@ -16,51 +23,44 @@ window#waybar {
     border: none;
     box-shadow: none;
     padding: 0em 0.5em;
-    background-color: #000;
-    color: #fff;
+    background-color: @black;
+    color: @white;
     margin-right: 5px;
 }
 
 #workspaces button:hover {
-    background-color: #202020;
+    background-color: @dark-grey;
 }
 
 #workspaces button.empty {
-    background-color: #303030;
+    background-color: @dark-grey;
 }
 
 #workspaces button.visible {
-    background-color: #303030;
+    background-color: @dark-grey;
 }
 
 #workspaces button.active {
-    background-color: #404040;
+    background-color: @dark-grey;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
-}
-
-#mode {
-    background-color: #64727D;
+    background-color: @warning;
 }
 
 #clock,
 #battery,
-#cpu,
 #memory,
-#temperature,
 #backlight,
 #network,
 #pulseaudio,
-#custom-media,
+#custom-cpu,
+#custom-gpu,
 #tray,
-#mode,
-#idle_inhibitor
+#custom-wlogout
 {
     padding: 0 0.5em;
-    margin: 0px 5px; 
-    color: #000;
+    margin: 0px 2px; 
 }
 
 #window,
@@ -79,30 +79,30 @@ window#waybar {
 }
 
 #clock {
-    background-color: #000000;
-    color: white;
+    background-color: @dark-grey;
+    color: @white;
 }
 
 #battery {
-    background-color: #000000;
-    color: white;
+    background-color: @black;
+    color: @white;
 }
 
 #battery.charging {
-    color: #ffffff;
-    background-color: #000000;
+    color: @ehite;
+    background-color: @black;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: @white;
+        color: @black;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: @warning;
+    color: @white;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -111,76 +111,58 @@ window#waybar {
 }
 
 label:focus {
-    background-color: #000000;
-}
-
-#cpu {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-#memory {
-    background-color: #000000;
-    color: white;
+    background-color: @black;
 }
 
 #backlight {
-    background-color: #000000;
-    color:white;
+    background-color: @dark-grey;
+    color: @white;
 }
 
 #network {
-    background-color: #000000;
-    color:white;
-
+    background-color: @dark-grey;
+    color: @white;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+    background-color: @warning;
 }
 
 #pulseaudio {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: @dark-grey;
+    color: @white;
 }
 
-#pulseaudio.muted {
-    background-color: #000000;
-    color: #ffffff;
+#custom-cpu {
+    color: @white;
+    background-color: @dark-grey;
 }
 
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
+#custom-cpu.critical {
+    color: @white;
+    background-color: @warning;
 }
 
-#custom-media.custom-spotify {
-    background-color: #66cc99;
+#custom-gpu {
+    color: @white;
+    background-color: @dark-grey;
 }
 
-#custom-media.custom-vlc {
-    background-color: #ffa000;
+#custom-gpu.critical {
+    color: @white;
+    background-color: @warning;
 }
 
-#temperature {
-    background-color: #f0932b;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
+#memory {
+    color: @white;
+    background-color: @dark-grey;
 }
 
 #tray {
-    /*padding: 0.5em;*/
-    background-color: #404040;
+    background-color: @dark-grey;
 }
 
-#idle_inhibitor {
-    background-color: #404040;
-}
-
-#idle_inhibitor.activated {
-    background-color: #fff;
-    color: #000;
+#custom-wlogout {
+    padding-right: 0.8em;
+    background-color: @dark-grey;
 }
